@@ -1,24 +1,20 @@
+import AppBtnBgLight from "../app-btn-bg-light/app-btn-bg-light";
+import UserBtnExit from "../user-btn-exit/user-btn-exit";
+import UserInfo from "../user-info/user-info";
+
 const AppNavbar = () => {
     return (
-        <div className="py-3 flex items-center justify-between">
+        <div className="py-3.5 flex items-center justify-between">
+            <h1 className="px-2 py-1 text-lg text-purple-400 font-bold rounded-md">
+                    <span className="mr-2.5">Todo</span>
+                    <i className="fa-solid fa-pen"></i>
+            </h1>
             <div>
-                <h1 className="px-2 py-1 border-2 border-purple-400 rounded-md">
-                    <span className="font-bold text-purple-400">Todo</span>
-                </h1>
+                <UserInfo />
             </div>
             <div>
-                <button
-                    type="button"
-                    className="border-2 border-slate-800 rounded-md py-1 px-2"
-                >
-                    <i className="fa-solid fa-sun text-slate-800"></i>
-                </button>
-                {/* <button
-                    type="button"
-                    className="border-2 border-white rounded-md py-1 px-2.5"
-                >
-                    <i className="fa-solid fa-moon text-white"></i>
-                </button> */}
+                <AppBtnBgLight />
+                <UserBtnExit />
             </div>
         </div>
     );
