@@ -9,3 +9,5 @@
 - [Formik](https://formik.org/docs/overview)
 
 ## Screenshots
+
+![todo-page](./screenshots/todo-page.jpg)
