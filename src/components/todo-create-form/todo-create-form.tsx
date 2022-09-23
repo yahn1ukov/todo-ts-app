@@ -1,12 +1,12 @@
 import { Field, Form, Formik } from "formik";
-import { CreateTodoFormValues } from "../../types/types";
+import { CreateTodoRequest } from "../../types/types";
 
 const TodoCreateForm = () => {
-    const initialValues: CreateTodoFormValues = {
+    const initialValues: CreateTodoRequest = {
         text: ""
     };
 
-    const onSubmit = (values: CreateTodoFormValues) => {
+    const onSubmit = (values: CreateTodoRequest) => {
         if (!values.text) return;
         if (values.text.length > 100) return;
     }

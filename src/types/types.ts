@@ -1,13 +1,39 @@
-export interface Todo {
+export interface GetTodoResponse {
     id: number,
     text: string,
     date: Date
 }
 
-export interface CreateTodoFormValues {
+export interface CreateTodoRequest {
     text: string
 }
 
-export interface ChangeTodoFormValues {
+export interface UpdateTodoRequest {
     text: string
 }
+
+export interface LoginRequest {
+    username: string,
+    password: string
+}
+
+export interface LoginResponse {
+    token: string
+}
+
+export interface ErrorResponse {
+    code: number,
+    message: string,
+    timestamp: Date
+}
+
+export interface AuthenticationContext {
+    token: string|null,
+    login: (token: string) => void,
+    logout: () => void,
+    isAuth: boolean
+}
+
+export type BodyRequest = CreateTodoRequest|UpdateTodoRequest|LoginRequest;
+
+export type BodyResponse = GetTodoResponse|LoginResponse|ErrorResponse;

@@ -1,40 +1,42 @@
-import { todo } from "../../data/data";
+import AuthContext from "../../context/auth.context";
+import { useAuth } from "../../hooks/auth.hook";
+import { useRoutes } from "../../routes/routes";
 import AppFooter from "../app-footer/app-footer";
 import AppNavbar from "../app-navbar/app-navbar";
+import { BrowserRouter as Router } from "react-router-dom";
 import ErrorBoundaries from "../error-boundaries/error-boundaries";
-import TodoCreateForm from "../todo-create-form/todo-create-form";
-import TodoFilterPanel from "../todo-filter-panel/todo-filter-panel";
-import TodoList from "../todo-list/todo-list";
 
 const App = () => {
+  const { token, login, logout } = useAuth();
+    const isAuth = !!token;
+    const routes = useRoutes(isAuth);
+
   return (
-    <div className="container mx-auto px-2 flex flex-col h-screen">
+    <AuthContext.Provider value={{
+      token, login, logout, isAuth 
+    }}>
+      <Router>
+        <div className="container mx-auto px-2 flex flex-col h-screen">
 
-      <header>
-        <ErrorBoundaries>
-          <AppNavbar />
-        </ErrorBoundaries>
-      </header>
+        <header>
+          <ErrorBoundaries>
+            <AppNavbar isAuth={isAuth} />
+          </ErrorBoundaries>
+        </header>
 
-      <main className="mt-5 mb-auto">
-        <ErrorBoundaries>
-          <TodoCreateForm />
-        </ErrorBoundaries>
-        <ErrorBoundaries>
-          <TodoFilterPanel />
-        </ErrorBoundaries>
-        <ErrorBoundaries>
-          <TodoList todo={todo} />
-        </ErrorBoundaries>
-      </main>
+        <main className="mt-5 mb-auto">
+          {routes} 
+        </main>
 
-      <footer>
-      <ErrorBoundaries>
-        <AppFooter />
-      </ErrorBoundaries>
-      </footer>
+        <footer>
+          <ErrorBoundaries>
+            <AppFooter />
+          </ErrorBoundaries>
+        </footer>
 
-    </div>
+        </div>
+      </Router>
+    </AuthContext.Provider> 
   );
 }
 
