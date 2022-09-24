@@ -6,6 +6,9 @@
 - [Tailwind CSS](https://tailwindcss.com/)
 - [TypeScript](https://www.typescriptlang.org/docs/)
 - [React](https://reactjs.org/docs/getting-started.html)
+  - Context;
+  - Custom react-hooks;
+  - react-router-dom.
 - [Formik](https://formik.org/docs/overview)
   - [Yup](https://formik.org/docs/guides/validation) 
 
