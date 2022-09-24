@@ -1,5 +1,5 @@
 export interface GetTodoResponse {
-    id: number,
+    id: string,
     text: string,
     date: Date
 }
@@ -10,6 +10,10 @@ export interface CreateTodoRequest {
 
 export interface UpdateTodoRequest {
     text: string
+}
+
+export interface GetUserResponse {
+    username: string
 }
 
 export interface LoginRequest {
@@ -36,4 +40,4 @@ export interface AuthenticationContext {
 
 export type BodyRequest = CreateTodoRequest|UpdateTodoRequest|LoginRequest;
 
-export type BodyResponse = GetTodoResponse|LoginResponse|ErrorResponse;
+export type BodyResponse = GetTodoResponse|GetUserResponse|LoginResponse|ErrorResponse;

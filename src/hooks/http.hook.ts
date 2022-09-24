@@ -8,13 +8,16 @@ export const useHttp = () => {
     const request = useCallback(async (url: string, method: string = "GET", body: BodyRequest|null = null, headers: any = {}) => {
         setLoading(true);
         try {
+            let jsonBody: string|null = null;
+
             if (body) {
+                jsonBody = JSON.stringify(body);
                 headers["Content-Type"] = "application/json";
             }
 
             const response = await fetch(url, {
                 method,
-                body: JSON.stringify(body),
+                body: jsonBody,
                 headers
             });
 
