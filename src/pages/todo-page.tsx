@@ -20,15 +20,11 @@ export const TodoPage = () => {
             .withAutomaticReconnect()
             .build();
 
-        setConnection(newConnection);
-    }, [token]);
-
-    useEffect(() => {
-        if(connection) {
-            console.log("Connected");
-            connection.start()
-                .then(() => {
-                    connection.on("LoadTodo", (todo: GetTodoResponse[]) => {
+        if(newConnection) {
+            setConnection(newConnection);
+            newConnection.start()
+                .then(async () => {
+                    await newConnection.on("LoadTodo", (todo: GetTodoResponse[]) => {
                         setTodo(todo);
                     })
                 })
@@ -36,21 +32,40 @@ export const TodoPage = () => {
         }
 
         return () => {
-            console.log("Disconnected");
-            connection?.stop();
+            newConnection.stop();
         }
+    }, [token]);
+
+    useEffect(() => {
+        if(connection) {
+            (async () => {
+                await connection.on("ReceiveTodo", (todo: GetTodoResponse) => {
+                setTodo(prev => [...prev, todo])
+            })
+            })(); 
+        }            
     }, [connection]);
 
+    useEffect(() => {
+        if(connection) {
+           (async () => {
+                await connection.on("DeleteTodo", (todoId: string) => {
+                    setTodo(prev => prev.filter(t => t.id !== todoId));
+                })
+           })(); 
+        }
+    }, [connection])
+        
     return(
         <>
             <ErrorBoundaries>
-                <TodoCreateForm />
+                <TodoCreateForm connection={connection} />
             </ErrorBoundaries>
             <ErrorBoundaries>
                 <TodoFilterPanel />
             </ErrorBoundaries>
             <ErrorBoundaries>
-                <TodoList todo={todo} />
+                <TodoList connection={connection} todo={todo} />
             </ErrorBoundaries>
         </>
     );

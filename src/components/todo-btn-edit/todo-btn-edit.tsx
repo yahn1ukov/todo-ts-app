@@ -1,4 +1,11 @@
-const TodoBtnEdit = () => {
+import { HubConnection } from "@microsoft/signalr";
+
+interface Props {
+    todoId: string, 
+    connection: HubConnection|null
+}
+
+const TodoBtnEdit = ({ todoId, connection }: Props) => {
     return (
         <button
             title="Edit"

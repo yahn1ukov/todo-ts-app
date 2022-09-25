@@ -9,17 +9,17 @@ export const useAuth = () => {
     const login = useCallback((token: string) => {
         setToken(token);
 
-        sessionStorage.setItem(userInfo, JSON.stringify({ token }));
+        localStorage.setItem(userInfo, JSON.stringify({ token }));
     }, []);
 
     const logout = useCallback(() => {
         setToken(null);
 
-        sessionStorage.removeItem(userInfo);
+        localStorage.removeItem(userInfo);
     }, []);
 
     useEffect(() => {
-        const data: LoginResponse = JSON.parse(sessionStorage.getItem(userInfo) ?? "{}");
+        const data: LoginResponse = JSON.parse(localStorage.getItem(userInfo) ?? "{}");
 
         if (data && data.token) {
             login(data.token);

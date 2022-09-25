@@ -20,7 +20,7 @@ const App = () => {
 
         <header>
           <ErrorBoundaries>
-            <AppNavbar isAuth={isAuth} />
+            <AppNavbar />
           </ErrorBoundaries>
         </header>
 

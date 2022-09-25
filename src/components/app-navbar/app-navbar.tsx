@@ -1,12 +1,12 @@
+import { useContext } from "react";
+import AuthContext from "../../context/auth.context";
 import AppBtnBgLight from "../app-btn-bg-light/app-btn-bg-light";
 import UserBtnExit from "../user-btn-exit/user-btn-exit";
 import UserInfo from "../user-info/user-info";
 
-interface Props {
-    isAuth: boolean
-}
-
-const AppNavbar = ({ isAuth }: Props) => {
+const AppNavbar = () => {
+    const { isAuth } = useContext(AuthContext);
+    
     return (
         <div className="py-3.5 flex items-center justify-between">
             <h1 className="text-lg text-purple-400 font-bold rounded-md">
