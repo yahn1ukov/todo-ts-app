@@ -1,15 +1,25 @@
+import { useCallback, useContext } from "react";
 import { Field, Form, Formik } from "formik";
+import AuthContext from "../../context/auth.context";
+import { useHttp } from "../../hooks/http.hook";
 import { CreateTodoRequest } from "../../types/types";
 
 const TodoCreateForm = () => {
+    const { request } = useHttp();
+    const { token } = useContext(AuthContext);
     const initialValues: CreateTodoRequest = {
         text: ""
     };
     
-    const onSubmit = async (todo: CreateTodoRequest) => {
-        if (!todo.text) return;
-        if (todo.text.length > 100) return;
-    }
+    const onSubmit = useCallback(async (values: CreateTodoRequest) => {
+        if (!values.text) return;
+        if (values.text.length > 100) return;
+        try {
+            await request("https://localhost:7066/api/todo", "POST", values, {
+                Authorization: `Bearer ${token}`
+            })
+        } catch(e) { } 
+    }, [token, request]); 
     
     return (
         <Formik

@@ -22,9 +22,8 @@ const AuthenticationForm = () => {
 
     const onSubmit = async (values: LoginRequest) => {
         try {
-            // const data: LoginResponse = await request("", "POST", values);
-            // login(data.token); 
-            login("test"); 
+            const data: LoginResponse = await request("https://localhost:7066/api/authentication/login", "POST", values);
+            login(data.token); 
         } catch(e) {
         }
     }

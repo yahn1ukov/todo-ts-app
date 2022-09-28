@@ -10,7 +10,7 @@ const UserInfo = () => {
 
     const getUser = useCallback(async () => {
         try {
-            return await request("", "GET", null, {
+            return await request("https://localhost:7066/api/users", "GET", null, {
                 Authorization: `Bearer ${token}`
             });
         } catch(e) { }
