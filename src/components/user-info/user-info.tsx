@@ -10,7 +10,7 @@ const UserInfo = () => {
 
     const getUser = useCallback(async () => {
         try {
-            return await request("https://localhost:7066/api/users", "GET", null, {
+            return await request("", "GET", null, {
                 Authorization: `Bearer ${token}`
             });
         } catch(e) { }
@@ -23,7 +23,7 @@ const UserInfo = () => {
 
     return(
         <>
-            <span className="mr-2 font-bold text-purple-400 break-words">{user?.username ?? "anonymous"}</span>
+            <span className="mr-2 font-bold text-purple-400 break-words">{user?.username ?? "guest"}</span>
             <span>👋</span>
         </>
     );

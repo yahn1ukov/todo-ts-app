@@ -1,24 +1,16 @@
-import { HubConnection } from "@microsoft/signalr";
 import { Field, Form, Formik } from "formik";
 import { CreateTodoRequest } from "../../types/types";
 
-interface Props {
-    connection: HubConnection|null
-}
-
-const TodoCreateForm = ({ connection }: Props) => {
+const TodoCreateForm = () => {
     const initialValues: CreateTodoRequest = {
         text: ""
     };
-
-    const onSubmit = async (values: CreateTodoRequest) => {
-        if (!values.text) return;
-        if (values.text.length > 100) return;
-        if(connection) {
-            await connection?.send("SendTodo", values);
-        } 
+    
+    const onSubmit = async (todo: CreateTodoRequest) => {
+        if (!todo.text) return;
+        if (todo.text.length > 100) return;
     }
-
+    
     return (
         <Formik
             initialValues={initialValues}

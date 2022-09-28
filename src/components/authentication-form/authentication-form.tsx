@@ -22,8 +22,9 @@ const AuthenticationForm = () => {
 
     const onSubmit = async (values: LoginRequest) => {
         try {
-            const data: LoginResponse = await request("https://localhost:7066/api/authentication/login", "POST", values);
-            login(data.token); 
+            // const data: LoginResponse = await request("", "POST", values);
+            // login(data.token); 
+            login("test"); 
         } catch(e) {
         }
     }
@@ -97,6 +98,7 @@ const AuthenticationForm = () => {
                 </div>
                 <button
                     onClick={clearError}
+                    disabled={loading}
                     type="submit"
                     className="border-2 transition px-2 py-1 border-purple-400 rounded-md font-bold text-purple-400 hover:bg-purple-400 hover:text-slate-800 focus:ring focus:ring-purple-400 focus:outline-none"
                 >
