@@ -10,7 +10,9 @@
   - Custom react-hooks;
   - react-router-dom.
 - [Formik](https://formik.org/docs/overview)
-  - [Yup](https://formik.org/docs/guides/validation) 
+  - [Yup](https://formik.org/docs/guides/validation)
+- [Redux](https://redux.js.org/usage/)
+  - [Redux Thunk](https://redux.js.org/usage/writing-logic-thunks)
 
 ## Screenshots
 
