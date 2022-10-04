@@ -2,8 +2,8 @@ import TodoBtnDelete from "../todo-btn-delete/todo-btn-delete";
 import TodoBtnEdit from "../todo-btn-edit/todo-btn-edit";
 
 interface Props {
-    text: string,
-    date: Date
+    text: string;
+    date: Date;
 }
 
 const TodoListItem = ({ text, date }: Props) => {

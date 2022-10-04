@@ -5,27 +5,27 @@ import TodoFilterPanel from "../components/todo-filter-panel/todo-filter-panel";
 import TodoList from "../components/todo-list/todo-list";
 import AuthContext from "../context/auth.context";
 import { useHttp } from "../hooks/http.hook";
-import { GetTodoResponse } from "../types/types";
+import { TodoResponse } from '../types/response';
 
 export const TodoPage = () => {
-    const [todo, setTodo] = useState<GetTodoResponse[]>([]);
+    const [todo, setTodo] = useState<TodoResponse[]>([]);
     const { request } = useHttp();
     const { token } = useContext(AuthContext);
 
     const getTodo = useCallback(async () => {
         try {
-            const data: GetTodoResponse[] = await request("https://localhost:7066/api/todo", "GET", null, {
+            const data: TodoResponse[] = await request("https://localhost:7066/api/todo", "GET", null, {
                 Authorization: `Bearer ${token}`
             });
             setTodo(data);
-        } catch(e) { }
+        } catch (e) { }
     }, [token, request]);
 
     useEffect(() => {
         getTodo()
     }, [getTodo]);
-    
-    return(
+
+    return (
         <>
             <ErrorBoundaries>
                 <TodoCreateForm />

@@ -1,6 +1,6 @@
-import { GetTodoResponse } from "../types/types";
+import { TodoResponse } from "../types/response";
 
-export const todo: GetTodoResponse[] = [
+export const todo: TodoResponse[] = [
     {
         id: "1",
         text: "Hello",

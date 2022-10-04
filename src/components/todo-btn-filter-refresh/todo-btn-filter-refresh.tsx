@@ -1,9 +1,9 @@
 interface Props {
-    getTodo: () => Promise<void>
+    getTodo: () => Promise<void>;
 }
 
 const TodoBtnFilterRefresh = ({ getTodo }: Props) => {
-    return(
+    return (
         <button
             title="Refresh"
             type="submit"
@@ -12,7 +12,7 @@ const TodoBtnFilterRefresh = ({ getTodo }: Props) => {
         >
             <i className="fa-solid fa-arrows-rotate"></i>
         </button>
-    ); 
+    );
 }
 
 export default TodoBtnFilterRefresh;

@@ -1,10 +1,10 @@
-import {useCallback, useEffect, useState} from "react";
-import { LoginResponse } from "../types/types";
+import { useCallback, useEffect, useState } from "react";
+import { LoginResponse } from "../types/response";
 
 const userInfo = "token";
 
 export const useAuth = () => {
-    const [token, setToken] = useState<string|null>(null);
+    const [token, setToken] = useState<string | null>(null);
 
     const login = useCallback((token: string) => {
         setToken(token);

@@ -1,14 +1,14 @@
-import { GetTodoResponse } from "../../types/types";
+import { TodoResponse } from "../../types/response";
 import TodoListItem from "../todo-list-item/todo-list-item";
 
 interface Props {
-    todo: GetTodoResponse[]
+    todo: TodoResponse[];
 }
 
 const TodoList = ({ todo }: Props) => {
     const element = todo.length ?
         todo.map(t => {
-            const {id, ...other} = t;
+            const { id, ...other } = t;
             return <TodoListItem
                 key={id}
                 {...other}

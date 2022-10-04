@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 import { Field, Form, Formik } from "formik";
 import AuthContext from "../../context/auth.context";
 import { useHttp } from "../../hooks/http.hook";
-import { CreateTodoRequest } from "../../types/types";
+import { CreateTodoRequest } from "../../types/request";
 
 const TodoCreateForm = () => {
     const { request } = useHttp();
@@ -10,7 +10,7 @@ const TodoCreateForm = () => {
     const initialValues: CreateTodoRequest = {
         text: ""
     };
-    
+
     const onSubmit = useCallback(async (values: CreateTodoRequest) => {
         if (!values.text) return;
         if (values.text.length > 100) return;
@@ -18,9 +18,9 @@ const TodoCreateForm = () => {
             await request("https://localhost:7066/api/todo", "POST", values, {
                 Authorization: `Bearer ${token}`
             })
-        } catch(e) { } 
-    }, [token, request]); 
-    
+        } catch (e) { }
+    }, [token, request]);
+
     return (
         <Formik
             initialValues={initialValues}

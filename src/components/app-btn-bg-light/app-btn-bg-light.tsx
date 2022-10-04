@@ -1,5 +1,5 @@
 interface Props {
-    isAuth: boolean
+    isAuth: boolean;
 }
 
 const AppBtnBgLight = ({ isAuth }: Props) => {
