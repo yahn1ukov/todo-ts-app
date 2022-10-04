@@ -1,4 +1,4 @@
-import { TodoResponse } from "../../types/response";
+import { TodoResponse } from "../../types/todo";
 import TodoListItem from "../todo-list-item/todo-list-item";
 
 interface Props {

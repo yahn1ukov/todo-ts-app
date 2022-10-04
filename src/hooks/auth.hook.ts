@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { LoginResponse } from "../types/response";
+import { AuthResponse } from "../types/auth";
 
 const userInfo = "token";
 
@@ -19,7 +19,7 @@ export const useAuth = () => {
     }, []);
 
     useEffect(() => {
-        const data: LoginResponse = JSON.parse(localStorage.getItem(userInfo) ?? "{}");
+        const data: AuthResponse = JSON.parse(localStorage.getItem(userInfo) ?? "{}");
 
         if (data && data.token) {
             login(data.token);

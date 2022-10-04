@@ -1,4 +1,18 @@
-import { TodoResponse, ErrorResponse } from './response'
+import { ErrorResponse } from './error'
+
+export interface CreateTodoRequest {
+    text: string;
+}
+
+export interface UpdateTodoRequest {
+    text: string;
+}
+
+export interface TodoResponse {
+    id: string;
+    text: string;
+    date: Date;
+}
 
 export interface TodoState {
     todo: TodoResponse[];

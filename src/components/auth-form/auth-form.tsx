@@ -1,30 +1,28 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { useContext, useState } from "react";
-import AuthContext from "../../context/auth.context";
+import { useState, useContext } from "react";
 import { useHttp } from "../../hooks/http.hook";
 import MessageError from "../message-error/message-error";
 import MessageLoading from "../message-loading/message-loading";
 import * as Yup from "yup";
-import { LoginRequest } from '../../types/request';
-import { useTypedSelector } from "../../hooks/selector.hook";
-import { useAction } from "../../hooks/action.hook";
+import { AuthRequest } from '../../types/auth';
+import { useAppSelector } from "../../hooks/selector.hook";
+import { fetchAuth } from '../../actions/auth.action';
+import { useAppDispatch } from "../../hooks/dispatch.hook";
+import AuthenticationContext from "../../context/auth.context";
 
-const AuthenticationForm = () => {
-    const initialValues: LoginRequest = {
+const AuthForm = () => {
+    const initialValues: AuthRequest = {
         username: "",
         password: ""
     }
     const [isPassword, setIsPassword] = useState(true);
     const { request } = useHttp();
-    const { fetchAuthentication } = useAction();
-    const { loading, error } = useTypedSelector(state => state.authentication);
+    const { login } = useContext(AuthenticationContext);
+    const dispatch = useAppDispatch();
+    const { loading, error } = useAppSelector(state => state.auth);
 
     const onHidePassword = (value: boolean) => {
         setIsPassword(value);
-    }
-
-    const onSubmit = (values: LoginRequest) => {
-        fetchAuthentication(request, values);
     }
 
     return (
@@ -41,7 +39,7 @@ const AuthenticationForm = () => {
                     .required("Password is a required field")
             })}
             onSubmit={(values, { resetForm }) => {
-                onSubmit(values);
+                dispatch(fetchAuth(request, login, values))
                 resetForm({ values: { username: "", password: "" } });
 
             }}
@@ -107,4 +105,4 @@ const AuthenticationForm = () => {
     );
 }
 
-export default AuthenticationForm;
+export default AuthForm;

@@ -3,14 +3,10 @@ import TodoBtnFilterDesc from "../todo-btn-filter-desc/todo-btn-filter-desc";
 import TodoBtnFilterRefresh from "../todo-btn-filter-refresh/todo-btn-filter-refresh";
 import TodoFilterSearch from "../todo-filter-search/todo-filter-search";
 
-interface Props {
-    getTodo: () => Promise<void>;
-}
-
-const TodoFilterPanel = ({ getTodo }: Props) => {
+const TodoFilterPanel = () => {
     return (
         <div className="mb-5 flex items-center">
-            <TodoBtnFilterRefresh getTodo={getTodo} />
+            <TodoBtnFilterRefresh />
             <TodoBtnFilterAsc />
             <TodoBtnFilterDesc />
             <TodoFilterSearch />

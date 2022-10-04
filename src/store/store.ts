@@ -1,7 +1,15 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunk from 'redux-thunk';
-import { rootReducer } from '../reducers';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { reducer as authReducer } from '../slices/auth.slice';
 
-const store = createStore(rootReducer, compose(applyMiddleware(thunk)));
+export const store = configureStore({
+    reducer: {
+        auth: authReducer
+    },
+    middleware: getDefaultMiddleware => getDefaultMiddleware({
+        serializableCheck: false
+    }),
+    devTools: process.env.NODE_ENV !== 'production'
+});
 
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
+export type RootDispatch = typeof store.dispatch;

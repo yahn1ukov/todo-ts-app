@@ -1,11 +1,11 @@
-import AuthenticationForm from "../components/authentication-form/authentication-form";
+import AuthForm from "../components/auth-form/auth-form";
 import ErrorBoundaries from "../components/error-boundaries/error-boundaries";
 
-export const AuthenticationPage = () => {
-    return(
+export const AuthPage = () => {
+    return (
         <div className="flex justify-center">
             <ErrorBoundaries>
-                <AuthenticationForm />
+                <AuthForm />
             </ErrorBoundaries>
         </div>
     );

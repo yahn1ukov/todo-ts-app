@@ -1,4 +1,4 @@
-import { ErrorResponse } from "../../types/response";
+import { ErrorResponse } from "../../types/error";
 
 interface Props {
     error: ErrorResponse | null;

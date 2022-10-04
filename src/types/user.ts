@@ -1,4 +1,8 @@
-import { UserResponse, ErrorResponse } from './response';
+import { ErrorResponse } from './error';
+
+export interface UserResponse {
+    username: string;
+}
 
 export interface UserState {
     user: UserResponse | null;
