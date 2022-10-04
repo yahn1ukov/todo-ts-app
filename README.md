@@ -13,6 +13,7 @@
   - [Yup](https://formik.org/docs/guides/validation)
 - [Redux](https://redux.js.org/usage/)
   - [Redux Thunk](https://redux.js.org/usage/writing-logic-thunks)
+  - [Redux Toolkit](https://redux.js.org/introduction/installation#redux-toolkit)
 
 ## Screenshots
 
