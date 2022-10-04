@@ -7,7 +7,7 @@ const initialState: AuthenticationState = {
     error: null
 }
 
-export const authentication = (state = initialState, action: AuthenticationAction): AuthenticationState => {
+const authenticationReducer = (state = initialState, action: AuthenticationAction): AuthenticationState => {
     switch (action.type) {
         case AuthenticationActionTypes.AUTHENTICATION_FETCHING:
             return {
@@ -31,3 +31,5 @@ export const authentication = (state = initialState, action: AuthenticationActio
             return state
     }
 }
+
+export default authenticationReducer;

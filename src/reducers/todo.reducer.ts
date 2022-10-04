@@ -7,7 +7,7 @@ const initialState: TodoState = {
     error: null
 }
 
-export const todo = (state = initialState, action: TodoAction): TodoState => {
+const todoReducer = (state = initialState, action: TodoAction): TodoState => {
     switch (action.type) {
         case TodoActionTypes.TODO_FETCHING:
             return {
@@ -30,3 +30,5 @@ export const todo = (state = initialState, action: TodoAction): TodoState => {
             return state
     }
 }
+
+export default todoReducer;

@@ -7,7 +7,7 @@ const initialState: UserState = {
     error: null
 }
 
-export const users = (state = initialState, action: UserAction): UserState => {
+const userReducer = (state = initialState, action: UserAction): UserState => {
     switch (action.type) {
         case UserActionTypes.USER_FETCHING:
             return {
@@ -30,3 +30,5 @@ export const users = (state = initialState, action: UserAction): UserState => {
             return state
     }
 }
+
+export default userReducer;

@@ -15,10 +15,9 @@ const AuthenticationForm = () => {
         password: ""
     }
     const [isPassword, setIsPassword] = useState(true);
-    const { login } = useContext(AuthContext);
     const { request } = useHttp();
     const { fetchAuthentication } = useAction();
-    const { loading, user, error } = useTypedSelector(state => state.authentication);
+    const { loading, error } = useTypedSelector(state => state.authentication);
 
     const onHidePassword = (value: boolean) => {
         setIsPassword(value);
@@ -26,7 +25,6 @@ const AuthenticationForm = () => {
 
     const onSubmit = (values: LoginRequest) => {
         fetchAuthentication(request, values);
-        login("");
     }
 
     return (
@@ -50,8 +48,8 @@ const AuthenticationForm = () => {
         >
             <Form className="flex flex-col items-center border-2 border-purple-400 rounded-md py-4 px-5">
                 <h2 className="text-purple-400 text-lg font-bold mb-2.5">Authentication</h2>
-                {/* state.error && <MessageError error={state.error} /> */}
-                {/* state.loading && <MessageLoading /> */}
+                {error && <MessageError error={error} />}
+                {loading && <MessageLoading />}
                 <div className="flex flex-col mb-2.5">
                     <label
                         id="auth-form-username"
@@ -99,6 +97,7 @@ const AuthenticationForm = () => {
                 </div>
                 <button
                     type="submit"
+                    disabled={loading}
                     className="border-2 transition px-2 py-1 border-purple-400 rounded-md font-bold text-purple-400 hover:bg-purple-400 hover:text-slate-800 focus:ring focus:ring-purple-400 focus:outline-none"
                 >
                     Submit
