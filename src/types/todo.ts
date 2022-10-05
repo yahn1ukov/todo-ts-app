@@ -11,6 +11,7 @@ export interface UpdateTodoRequest {
 export interface TodoResponse {
     id: string;
     text: string;
+    isEdited: boolean;
     date: Date;
 }
 

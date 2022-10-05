@@ -5,7 +5,7 @@ import TodoFilterSearch from "../todo-filter-search/todo-filter-search";
 
 const TodoFilterPanel = () => {
     return (
-        <div className="mb-5 flex items-center">
+        <div className="mb-5 flex">
             <TodoBtnFilterRefresh />
             <TodoBtnFilterAsc />
             <TodoBtnFilterDesc />

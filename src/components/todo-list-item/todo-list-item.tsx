@@ -1,24 +1,70 @@
+import { Field, Form, Formik } from "formik";
+import { UpdateTodoRequest } from "../../types/todo";
 import TodoBtnDelete from "../todo-btn-delete/todo-btn-delete";
-import TodoBtnEdit from "../todo-btn-edit/todo-btn-edit";
+import { useContext } from 'react';
+import AuthenticationContext from "../../context/auth.context";
+import { useHttp } from "../../hooks/http.hook";
+import { useAppDispatch } from "../../hooks/dispatch.hook";
+import { todoEdited } from '../../slices/todo.slice';
 
 interface Props {
+    id: string;
     text: string;
+    isEdited: boolean;
     date: Date;
     onDelete: () => Promise<void>
 }
 
-const TodoListItem = ({ text, date, onDelete }: Props) => {
+const TodoListItem = ({ id, text, isEdited, date, onDelete }: Props) => {
+    const initialValues: UpdateTodoRequest = {
+        text
+    }
+    const { token } = useContext(AuthenticationContext);
+    const { request } = useHttp();
+    const dispatch = useAppDispatch();
+
+    const onEdit = async (id: string, values: UpdateTodoRequest) => {
+        if (!values.text) return;
+        if (values.text.length > 100) return;
+        await request(`https://localhost:7066/api/todo/${id}`, 'PATCH', values, {
+            Authorization: `Bearer ${token}`
+        })
+            .then(() => dispatch(todoEdited({ id, text: values.text, isEdited: true })))
+    };
+
     return (
-        <li className="flex items-center px-3 py-1.5 bg-slate-800 text-purple-400 border-b-2 border-b-purple-400 last:border-b-0 first:rounded-t-lg last:rounded-b-lg">
-            <div className="flex flex-col flex-1 mr-2.5">
-                <span className="mb-1 text-lg break-all text-justify">{text}</span>
-                {/* <span className="text-sm text-gray-400">{new Date(date).toLocaleString()}</span> */}
+        <li className="flex pl-2.5 pr-1.5 py-1.5 bg-slate-800 text-purple-400 border-b-2 border-b-purple-400 last:border-b-0 first:rounded-t-lg last:rounded-b-lg">
+            <div className="flex flex-col flex-1">
+                <Formik
+                    initialValues={initialValues}
+                    onSubmit={values => onEdit(id, values)}
+                >
+                    <Form className="flex-1 flex">
+                        <Field
+                            id="todo-title"
+                            name="text"
+                            type="text"
+                            className="flex-1 text-purple-400 bg-slate-800 mr-2.5 focus:outline-none"
+
+                        />
+                        <button
+                            title="Edit"
+                            type="submit"
+                            className="flex-none mr-2.5 border-2 transition border-purple-400 rounded-md py-1 px-2 hover:bg-purple-400 hover:text-slate-800 focus:ring focus:ring-purple-400 focus:outline-none"
+                        >
+                            <i className="fa-solid fa-pen"></i>
+                        </button>
+                    </Form>
+                </Formik>
+                <div>
+                    {isEdited && <span className="text-sm mr-2.5">Edited</span>}
+                    <span className="text-sm text-gray-400">{new Date(date).toLocaleString()}</span>
+                </div>
             </div>
             <div className="flex-none">
-                <TodoBtnEdit />
                 <TodoBtnDelete onDelete={onDelete} />
             </div>
-        </li>
+        </li >
     );
 }
 

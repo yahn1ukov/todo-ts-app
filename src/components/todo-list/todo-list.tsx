@@ -17,6 +17,7 @@ const TodoList = () => {
         dispatch(fetchTodo(request, token!));
     }, [dispatch, request, token])
 
+
     const onDelete = useCallback(async (id: string) => {
         await request(`https://localhost:7066/api/todo/${id}`, 'DELETE', null, {
             Authorization: `Bearer ${token}`
@@ -29,6 +30,7 @@ const TodoList = () => {
             const { id, ...other } = t;
             return <TodoListItem
                 key={id}
+                id={id}
                 onDelete={() => onDelete(id)}
                 {...other}
             />

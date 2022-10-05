@@ -26,15 +26,26 @@ const todoSlice = createSlice({
             state.todo = [];
             state.error = action.payload;
         },
-        todoCreated: (state, action) => {
+        todoSortedByDesc: (state, action) => {
             state.loading = false;
-            state.todo.push(action.payload);
+            state.todo = action.payload.reverse();
             state.error = null;
         },
+        todoSearched: (state, aciton) => {
+
+        },
+        todoCreated: (state, action) => {
+            state.todo.push(action.payload);
+        },
+        todoEdited: (state, action) => {
+            state.todo = [
+                ...state.todo,
+                state.todo.find(t => t.id === action.payload.id)!.text = action.payload.text,
+                state.todo.find(t => t.id === action.payload.id)!.isEdited = action.payload.isEdited
+            ];
+        },
         todoDeleted: (state, action) => {
-            state.loading = false;
             state.todo = state.todo.filter(t => t.id !== action.payload);
-            state.error = null;
         }
     }
 });
@@ -46,6 +57,9 @@ export const {
     todoFetching,
     todoFetchedSuccess,
     todoFetchedError,
+    todoSortedByDesc,
+    todoSearched,
     todoCreated,
+    todoEdited,
     todoDeleted
 } = actions;
