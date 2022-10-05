@@ -1,15 +1,28 @@
-import { useCallback } from "react";
+import { useContext } from "react";
 import { Field, Form, Formik } from "formik";
 import { useHttp } from "../../hooks/http.hook";
 import { CreateTodoRequest } from "../../types/todo";
+import AuthenticationContext from "../../context/auth.context";
+import { useAppDispatch } from "../../hooks/dispatch.hook";
+import { todoCreated } from '../../slices/todo.slice';
+import { ErrorResponse } from "@remix-run/router";
 
 const TodoCreateForm = () => {
     const { request } = useHttp();
+    const { token } = useContext(AuthenticationContext);
+    const dispatch = useAppDispatch();
+
     const initialValues: CreateTodoRequest = {
         text: ""
     };
 
-    const onSubmit = (values: CreateTodoRequest) => { }
+    const onSubmit = async (values: CreateTodoRequest) => {
+        await request('https://localhost:7066/api/todo', 'POST', values, {
+            Authorization: `Bearer ${token}`
+        })
+            .then(() => dispatch(todoCreated(values)))
+            .catch((error: ErrorResponse) => console.log(error))
+    }
 
     return (
         <Formik

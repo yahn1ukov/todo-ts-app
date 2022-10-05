@@ -4,9 +4,10 @@ import TodoBtnEdit from "../todo-btn-edit/todo-btn-edit";
 interface Props {
     text: string;
     date: Date;
+    onDelete: () => Promise<void>
 }
 
-const TodoListItem = ({ text, date }: Props) => {
+const TodoListItem = ({ text, date, onDelete }: Props) => {
     return (
         <li className="flex items-center px-3 py-1.5 bg-slate-800 text-purple-400 border-b-2 border-b-purple-400 last:border-b-0 first:rounded-t-lg last:rounded-b-lg">
             <div className="flex flex-col flex-1 mr-2.5">
@@ -15,7 +16,7 @@ const TodoListItem = ({ text, date }: Props) => {
             </div>
             <div className="flex-none">
                 <TodoBtnEdit />
-                <TodoBtnDelete />
+                <TodoBtnDelete onDelete={onDelete} />
             </div>
         </li>
     );

@@ -13,7 +13,7 @@ const UserInfo = () => {
 
     useEffect(() => {
         dispatch(fetchUser(request, token!))
-    }, [])
+    }, [dispatch, request, token])
 
     return (
         <>

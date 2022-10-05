@@ -25,6 +25,16 @@ const todoSlice = createSlice({
             state.loading = false;
             state.todo = [];
             state.error = action.payload;
+        },
+        todoCreated: (state, action) => {
+            state.loading = false;
+            state.todo.push(action.payload);
+            state.error = null;
+        },
+        todoDeleted: (state, action) => {
+            state.loading = false;
+            state.todo = state.todo.filter(t => t.id !== action.payload);
+            state.error = null;
         }
     }
 });
@@ -35,5 +45,7 @@ export { reducer };
 export const {
     todoFetching,
     todoFetchedSuccess,
-    todoFetchedError
+    todoFetchedError,
+    todoCreated,
+    todoDeleted
 } = actions;
