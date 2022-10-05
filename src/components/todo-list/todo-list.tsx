@@ -1,11 +1,21 @@
-import { TodoResponse } from "../../types/todo";
+import { useContext, useEffect } from "react";
+import AuthenticationContext from "../../context/auth.context";
+import { useAppDispatch } from "../../hooks/dispatch.hook";
+import { useHttp } from "../../hooks/http.hook";
+import { useAppSelector } from "../../hooks/selector.hook";
 import TodoListItem from "../todo-list-item/todo-list-item";
+import { fetchTodo } from '../../actions/todo.action';
 
-interface Props {
-    todo: TodoResponse[];
-}
+const TodoList = () => {
+    const { request } = useHttp();
+    const { token } = useContext(AuthenticationContext);
+    const dispatch = useAppDispatch();
+    const { todo } = useAppSelector(state => state.todo);
 
-const TodoList = ({ todo }: Props) => {
+    useEffect(() => {
+        dispatch(fetchTodo(request, token!));
+    }, [])
+
     const element = todo.length ?
         todo.map(t => {
             const { id, ...other } = t;

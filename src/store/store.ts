@@ -1,9 +1,13 @@
 import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { reducer as authReducer } from '../slices/auth.slice';
+import { reducer as userReducer } from '../slices/user.slice';
+import { reducer as todoReducer } from '../slices/todo.slice';
 
 export const store = configureStore({
     reducer: {
-        auth: authReducer
+        auth: authReducer,
+        users: userReducer,
+        todo: todoReducer
     },
     middleware: getDefaultMiddleware => getDefaultMiddleware({
         serializableCheck: false
