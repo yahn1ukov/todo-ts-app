@@ -11,11 +11,10 @@ interface Props {
     id: string;
     text: string;
     isEdited: boolean;
-    date: Date;
     onDelete: () => Promise<void>
 }
 
-const TodoListItem = ({ id, text, isEdited, date, onDelete }: Props) => {
+const TodoListItem = ({ id, text, isEdited, onDelete }: Props) => {
     const initialValues: UpdateTodoRequest = {
         text
     }
@@ -56,10 +55,7 @@ const TodoListItem = ({ id, text, isEdited, date, onDelete }: Props) => {
                         </button>
                     </Form>
                 </Formik>
-                <div>
-                    {isEdited && <span className="text-sm mr-2.5">Edited</span>}
-                    <span className="text-sm text-gray-400">{new Date(date).toLocaleString()}</span>
-                </div>
+                {isEdited && <span className="text-sm opacity-70 mr-2.5">Edited</span>}
             </div>
             <div className="flex-none">
                 <TodoBtnDelete onDelete={onDelete} />

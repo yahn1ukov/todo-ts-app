@@ -21,28 +21,35 @@ const todoSlice = createSlice({
             state.todo = action.payload;
             state.error = null;
         },
+        todoSortedByAsc: (state, action) => {
+            state.loading = false;
+            state.todo = action.payload;
+            state.error = null;
+        },
+        todoSortedByDesc: (state, action) => {
+            state.loading = false;
+            state.todo = action.payload;
+            state.error = null;
+        },
         todoFetchedError: (state, action) => {
             state.loading = false;
             state.todo = [];
             state.error = action.payload;
         },
-        todoSortedByDesc: (state, action) => {
-            state.loading = false;
-            state.todo = action.payload.reverse();
-            state.error = null;
-        },
-        todoSearched: (state, aciton) => {
-
-        },
         todoCreated: (state, action) => {
             state.todo.push(action.payload);
         },
         todoEdited: (state, action) => {
-            state.todo = [
-                ...state.todo,
-                state.todo.find(t => t.id === action.payload.id)!.text = action.payload.text,
-                state.todo.find(t => t.id === action.payload.id)!.isEdited = action.payload.isEdited
-            ];
+            state.todo = state.todo.map(t => {
+                if (t.id === action.payload.id) {
+                    return {
+                        ...t,
+                        text: action.payload.text,
+                        isEdited: action.payload.isEdited
+                    }
+                }
+                return t;
+            });
         },
         todoDeleted: (state, action) => {
             state.todo = state.todo.filter(t => t.id !== action.payload);
@@ -57,8 +64,8 @@ export const {
     todoFetching,
     todoFetchedSuccess,
     todoFetchedError,
+    todoSortedByAsc,
     todoSortedByDesc,
-    todoSearched,
     todoCreated,
     todoEdited,
     todoDeleted

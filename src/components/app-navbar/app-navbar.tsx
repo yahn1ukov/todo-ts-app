@@ -1,4 +1,3 @@
-import AppBtnBgLight from "../app-btn-bg-light/app-btn-bg-light";
 import UserBtnExit from "../user-btn-exit/user-btn-exit";
 import UserInfo from "../user-info/user-info";
 
@@ -20,7 +19,6 @@ const AppNavbar = ({ isAuth }: Props) => {
                 </div>
             }
             <div>
-                <AppBtnBgLight isAuth={isAuth} />
                 {
                     isAuth && <UserBtnExit />
                 }

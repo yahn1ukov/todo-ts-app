@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useId } from "react";
 import { Field, Form, Formik } from "formik";
 import { useHttp } from "../../hooks/http.hook";
 import { CreateTodoRequest } from "../../types/todo";
@@ -11,7 +11,7 @@ const TodoCreateForm = () => {
     const { request } = useHttp();
     const { token } = useContext(AuthenticationContext);
     const dispatch = useAppDispatch();
-
+    const id = useId();
     const initialValues: CreateTodoRequest = {
         text: ""
     };
@@ -20,7 +20,7 @@ const TodoCreateForm = () => {
         await request('https://localhost:7066/api/todo', 'POST', values, {
             Authorization: `Bearer ${token}`
         })
-            .then(() => dispatch(todoCreated(values)))
+            .then(() => dispatch(todoCreated({ ...values, id })))
             .catch((error: ErrorResponse) => console.log(error))
     }
 
